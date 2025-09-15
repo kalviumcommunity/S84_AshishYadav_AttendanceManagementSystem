@@ -1,36 +1,47 @@
 package com.school;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        String ownerName = "Aviansh";
-        System.out.println("Welcome to the School Attendance System Project! Owner: " + ownerName);
-        System.out.println("Session 1: Project Setup and Orientation Complete.");
+        System.out.println("--- School Administration & Attendance System ---"); // Title update
 
-        ArrayList<AttendanceRecord> attendancelog = new ArrayList<>();
+        // Creating different types of people
+        System.out.println("\n--- Creating School Personnel ---");
+        Student student1 = new Student("Alice Wonderland", "Grade 10");
+        Student student2 = new Student("Bob The Builder", "Grade 9");
+        Teacher teacher1 = new Teacher("Dr. Emily Carter", "Physics");
+        Staff staff1 = new Staff("Mr. John Davis", "Librarian");
 
-        Student[] students = new Student[2];
-        Course[] courses = new Course[2];
-        students[0] = new Student("Aviansh Guleria");
-        students[1] = new Student("Sksham Kaushal");
-        courses[0] = new Course("Data Structure and Algorithms");
-        courses[1] = new Course("Full Stack Web Development");
+        System.out.println("\n--- School Personnel Details ---");
+        student1.displayDetails();
+        student2.displayDetails();
+        teacher1.displayDetails();
+        staff1.displayDetails();
 
-        students[0].displayDetails();
-        students[1].displayDetails();
+        Course course1 = new Course("Intro to Quantum Physics"); // Updated course name
+        System.out.println("\nAvailable Courses:");
+        course1.displayDetails();
 
-        courses[0].displayCourseDetails();
-        courses[1].displayCourseDetails();
 
-        attendancelog.add(new AttendanceRecord(students[0].getStudentId(), courses[0].getCourseId(), "Present"));
-        attendancelog.add(new AttendanceRecord(students[1].getStudentId(), courses[1].getCourseId(), "Absent"));
-        attendancelog.add(new AttendanceRecord(students[0].getStudentId(), courses[1].getCourseId(), "Avinash"));
+        // --- Attendance Recording (Modified to use Person's ID) ---
+        System.out.println("\n--- Attendance Recording ---");
+        List<AttendanceRecord> attendanceLog = new ArrayList<>();
 
-        System.err.println("Attendance Log");
+        // Student1 attends course1
+        AttendanceRecord record1 = new AttendanceRecord(student1.getId(), course1.getCourseId(), "Present");
+        attendanceLog.add(record1);
 
-        for(AttendanceRecord record : attendancelog){
+        // Student2 attempts to attend course1 with an invalid status
+        AttendanceRecord record2 = new AttendanceRecord(student2.getId(), course1.getCourseId(), "Daydreaming");
+        attendanceLog.add(record2);
+
+        System.out.println("\n--- Attendance Log ---");
+        for (AttendanceRecord record : attendanceLog) {
             record.displayRecord();
         }
+
+        System.out.println("\nSession 5: Inheritance Hierarchy Established Complete.");
     }
-}`
+}
